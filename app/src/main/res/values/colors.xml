@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#FFFFFFFF</color><!-- 全白 -->
+    <color name="white_66">#66FFFFFF</color><!-- 透明白 66 -->
+    <color name="ivory">#FFFFF0</color><!-- 象牙色 -->
+
+    <color name="_9">#999999</color>
+
+    <color name="c">#CCCCCC</color>
+    <color name="e">#EEEEEE</color>
 </resources>

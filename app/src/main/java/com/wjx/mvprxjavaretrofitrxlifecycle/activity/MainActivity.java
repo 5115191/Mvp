@@ -4,8 +4,10 @@ import com.wjx.mvprxjavaretrofitrxlifecycle.R;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseActivity;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BasePresenter;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseView;
+import com.wjx.mvprxjavaretrofitrxlifecycle.presenter.MainPresenter;
+import com.wjx.mvprxjavaretrofitrxlifecycle.view.MainView;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity<MainView,MainPresenter> implements MainView {
 
 
     @Override
@@ -14,12 +16,12 @@ public class MainActivity extends BaseActivity  {
     }
 
     @Override
-    protected BaseView createView() {
-        return null;
+    protected MainView createView() {
+        return this;
     }
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected MainPresenter createPresenter() {
         return null;
     }
 
