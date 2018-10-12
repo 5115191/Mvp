@@ -1,46 +1,60 @@
 package com.wjx.mvprxjavaretrofitrxlifecycle.presenter;
 
-import com.wjx.mvprxjavaretrofitrxlifecycle.base.BasePresenter;
+import android.content.Context;
+import android.widget.Toast;
+
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.wjx.mvprxjavaretrofitrxlifecycle.api.Api;
+import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseResponse;
+import com.wjx.mvprxjavaretrofitrxlifecycle.contract.LoginContract;
+import com.wjx.mvprxjavaretrofitrxlifecycle.entity.ArticleListInfo;
+import com.wjx.mvprxjavaretrofitrxlifecycle.entity.LoginData;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
-import com.wjx.mvprxjavaretrofitrxlifecycle.interactor.LoginInteractor;
-import com.wjx.mvprxjavaretrofitrxlifecycle.view.LoginView;
+
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author: WangJX
  * Time:2018/10/10 11:09
  * Descriprtion:
  */
-public class LoginPresenter extends BasePresenter<LoginView> implements LoginInteractor.OnLoginFinishedListener {
-    private LoginView loginView;
-    private LoginInteractor loginInteractor;
+public class LoginPresenter extends LoginContract.Presenter {
+    private Context context;
 
-
-    public LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {
-        this.loginView = loginView;
-        this.loginInteractor = loginInteractor;
+    public LoginPresenter(Context context) {
+        this.context = context;
     }
 
-    public void login(UserInfo userInfo){
-        loginInteractor.login(userInfo,this);
-    }
 
     @Override
-    public void onUsernameError() {
-        if (null != loginView)
-            loginView.setUsernameError();
-    }
+    public void login(UserInfo userInfo) {
+        Api.getApiService().getLoginData("xx5115191", "wjx19920912..")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResponse<LoginData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-    @Override
-    public void onPasswordError() {
-        if (null != loginView)
+                    }
 
-            loginView.setPasswordError();
-    }
+                    @Override
+                    public void onNext(BaseResponse<LoginData> loginDataBaseResponse) {
 
-    @Override
-    public void onLoginSuccess() {
-        if (null != loginView)
+                    }
 
-            loginView.navigateToHome();
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

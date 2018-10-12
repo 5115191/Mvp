@@ -20,12 +20,11 @@ import android.widget.Toast;
 
 import com.wjx.mvprxjavaretrofitrxlifecycle.R;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseActivity;
+import com.wjx.mvprxjavaretrofitrxlifecycle.contract.LoginContract;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
-import com.wjx.mvprxjavaretrofitrxlifecycle.interactor.LoginInteractor;
 import com.wjx.mvprxjavaretrofitrxlifecycle.presenter.LoginPresenter;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.RxAnimationTool;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.RxKeyboardTool;
-import com.wjx.mvprxjavaretrofitrxlifecycle.view.LoginView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,7 +34,7 @@ import butterknife.OnClick;
  * Time:2018/10/10 10:15
  * Descriprtion:登录界面
  */
-public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
+public class LoginActivity extends BaseActivity<LoginContract.View, LoginContract.Presenter> implements LoginContract.View {
     @BindView(R.id.et_user_name)
     EditText etUserName;
     @BindView(R.id.iv_clean_user_name)
@@ -72,16 +71,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     @Override
-    protected LoginView createView() {
+    protected LoginContract.View createView() {
         return this;
     }
 
     @Override
-    protected LoginPresenter createPresenter() {
-        return new LoginPresenter(this, new LoginInteractor());
+    protected LoginContract.Presenter createPresenter() {
+        return new LoginPresenter(this);
     }
-
-
     @Override
     protected void init() {
 
@@ -232,6 +229,4 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                 break;
         }
     }
-
-
 }
