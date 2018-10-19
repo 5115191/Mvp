@@ -2,6 +2,7 @@ package com.wjx.mvprxjavaretrofitrxlifecycle.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.text.Editable;
 import android.text.InputType;
@@ -20,14 +21,20 @@ import android.widget.Toast;
 
 import com.wjx.mvprxjavaretrofitrxlifecycle.R;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseActivity;
+import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseResponse;
 import com.wjx.mvprxjavaretrofitrxlifecycle.contract.LoginContract;
+import com.wjx.mvprxjavaretrofitrxlifecycle.entity.LoginData;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
 import com.wjx.mvprxjavaretrofitrxlifecycle.presenter.LoginPresenter;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.RxAnimationTool;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.RxKeyboardTool;
+import com.wjx.mvprxjavaretrofitrxlifecycle.utils.SnackbarUtils;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.ObservableTransformer;
 
 /**
  * Author: WangJX
@@ -63,6 +70,7 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
 
     private int screenHeight = 0;//屏幕高度
     private int keyHeight = 0; //软件盘弹起后所占高度
+    private View snackBarRootView;
 
 
     @Override
@@ -79,28 +87,28 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
     protected LoginContract.Presenter createPresenter() {
         return new LoginPresenter(this);
     }
+
     @Override
     protected void init() {
-
+        snackBarRootView = findViewById(android.R.id.content);
         initEvent();
     }
 
 
     @Override
-    public void setUsernameError() {
-        etUserName.setError("用户名错误");
-    }
-
-    @Override
-    public void setPasswordError() {
-        etUserPwd.setError("密码错误");
-    }
-
-    @Override
-    public void navigateToHome() {
+    public void loginSuccess() {
 
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    public void result(LoginData data) {
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+         return this.bindToLifecycle();
     }
 
     private void initEvent() {
@@ -148,12 +156,14 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                 if (s.toString().isEmpty()) {
                     return;
                 }
+/*
                 if (!s.toString().matches("[A-Za-z0-9]+")) {
                     String temp = s.toString();
                     Toast.makeText(mContext, "请输入数字或字母", Toast.LENGTH_SHORT).show();
                     s.delete(temp.length() - 1, temp.length());
                     etUserPwd.setSelection(s.length());
                 }
+*/
             }
         });
 
@@ -220,8 +230,15 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                     etUserPwd.setSelection(pwd.length());
                 break;
             case R.id.btn_login:
-                getPresenter().login(new UserInfo(etUserName.getText().toString().trim(), etUserPwd.getText().toString().trim()));
-                RxKeyboardTool.hideSoftInput(mContext);
+                if (etUserName.getText().toString().trim().isEmpty() || etUserPwd.getText().toString().trim().isEmpty()) {
+                    SnackbarUtils.with(snackBarRootView).setMessage("用户名或密码不能为空").showError();
+                } else {
+                    HashMap<String,String> hashMap = new HashMap<>();
+                    hashMap.put("username",etUserName.getText().toString().trim());
+                    hashMap.put("password",etUserPwd.getText().toString().trim());
+                    getPresenter().login(hashMap,false,true);
+                    RxKeyboardTool.hideSoftInput(mContext);
+                }
                 break;
             case R.id.regist:
                 break;

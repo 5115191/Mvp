@@ -10,16 +10,6 @@ public class BaseResponse<T> {
     private int code;
     private T Data;
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-
-
     public T getData() {
         return Data;
     }

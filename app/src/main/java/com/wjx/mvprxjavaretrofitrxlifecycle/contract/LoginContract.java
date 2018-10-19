@@ -1,8 +1,15 @@
 package com.wjx.mvprxjavaretrofitrxlifecycle.contract;
 
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BasePresenter;
+import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseResponse;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseView;
+import com.wjx.mvprxjavaretrofitrxlifecycle.entity.LoginData;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
+
+import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.ObservableTransformer;
 
 /**
  * Author: WangJX
@@ -11,16 +18,19 @@ import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
  */
 public interface LoginContract {
      interface View extends BaseView {
-        void setUsernameError();
 
-        void setPasswordError();
 
-        void navigateToHome();
+        void loginSuccess();
 
+         void result(LoginData data);
+
+
+         <T> ObservableTransformer<T, T> bindLifecycle();
 
     }
 
      abstract class Presenter extends BasePresenter<View> {
-        public abstract void login(UserInfo userInfo);
+
+         public abstract void login(HashMap<String,String> map, boolean isDialog, boolean cancelable);
     }
 }

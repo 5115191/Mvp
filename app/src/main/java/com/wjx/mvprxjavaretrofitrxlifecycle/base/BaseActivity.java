@@ -32,7 +32,9 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V
         if (presenter == null) {
             presenter = createPresenter();
         }
-
+        if(presenter != null && view != null){
+            presenter.attachView(view);
+        }
         init();
     }
 
