@@ -7,11 +7,13 @@ import android.support.annotation.Nullable;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V>> extends RxAppCompatActivity {
     private V view;
     private P presenter;
+    private Unbinder unbinder;
 
     public P getPresenter() {
         return presenter;
@@ -23,7 +25,7 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getViewId());
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         mContext = this;
         if (view == null) {
             view = createView();
@@ -32,7 +34,7 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V
         if (presenter == null) {
             presenter = createPresenter();
         }
-        if(presenter != null && view != null){
+        if (presenter != null && view != null) {
             presenter.attachView(view);
         }
         init();
@@ -49,8 +51,13 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (null != presenter)
+        if (null != presenter) {
             presenter.detachView();
+        }
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+        super.onDestroy();
+
     }
 }

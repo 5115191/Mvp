@@ -12,4 +12,5 @@
 
     <color name="c">#CCCCCC</color>
     <color name="e">#EEEEEE</color>
+    <color name="colorBackground">#eeeeee</color>
 </resources>

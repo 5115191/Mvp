@@ -2,7 +2,6 @@ package com.wjx.mvprxjavaretrofitrxlifecycle.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.text.Editable;
 import android.text.InputType;
@@ -17,14 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wjx.mvprxjavaretrofitrxlifecycle.R;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseActivity;
-import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseResponse;
 import com.wjx.mvprxjavaretrofitrxlifecycle.contract.LoginContract;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.LoginData;
-import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
 import com.wjx.mvprxjavaretrofitrxlifecycle.presenter.LoginPresenter;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.RxAnimationTool;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.RxKeyboardTool;

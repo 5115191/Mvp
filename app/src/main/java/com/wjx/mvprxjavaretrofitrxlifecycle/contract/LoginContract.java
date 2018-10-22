@@ -1,13 +1,10 @@
 package com.wjx.mvprxjavaretrofitrxlifecycle.contract;
 
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BasePresenter;
-import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseResponse;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseView;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.LoginData;
-import com.wjx.mvprxjavaretrofitrxlifecycle.entity.UserInfo;
 
 import java.util.HashMap;
-import java.util.List;
 
 import io.reactivex.ObservableTransformer;
 
