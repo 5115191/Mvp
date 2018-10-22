@@ -236,7 +236,7 @@ public class LoginActivity extends BaseActivity<LoginContract.View, LoginContrac
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("username",etUserName.getText().toString().trim());
                     hashMap.put("password",etUserPwd.getText().toString().trim());
-                    getPresenter().login(hashMap,true,true);
+                    getPresenter().login(hashMap,false,true);
                     RxKeyboardTool.hideSoftInput(mContext);
                 }
                 break;
