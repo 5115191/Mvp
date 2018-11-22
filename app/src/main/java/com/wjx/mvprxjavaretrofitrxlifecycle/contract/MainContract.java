@@ -8,12 +8,12 @@ import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseView;
  * Time:2018/10/22 14:04
  * Descriprtion:
  */
-public interface MainContract  {
-    interface View extends BaseView{
-       void initBanner();
+public interface MainContract {
+    interface View extends BaseView {
+        void initMainFragment();
     }
 
-    abstract class Presenter extends BasePresenter<View>{
-
+    abstract class Presenter extends BasePresenter<View> {
+        public abstract void init();
     }
 }

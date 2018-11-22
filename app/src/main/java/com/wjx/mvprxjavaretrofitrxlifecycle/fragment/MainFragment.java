@@ -1,15 +1,10 @@
 package com.wjx.mvprxjavaretrofitrxlifecycle.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.wjx.mvprxjavaretrofitrxlifecycle.R;
 import com.wjx.mvprxjavaretrofitrxlifecycle.base.BaseFragment;
 import com.wjx.mvprxjavaretrofitrxlifecycle.contract.MainBannerContract;
 import com.wjx.mvprxjavaretrofitrxlifecycle.entity.BannerData;
-import com.wjx.mvprxjavaretrofitrxlifecycle.presenter.MainPresenter;
+import com.wjx.mvprxjavaretrofitrxlifecycle.presenter.MainFragmentPresenter;
 import com.wjx.mvprxjavaretrofitrxlifecycle.utils.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -19,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
 
@@ -43,7 +37,7 @@ public class MainFragment extends BaseFragment<MainBannerContract.View, MainBann
 
     @Override
     public MainBannerContract.Presenter createPresenter() {
-        return new MainPresenter(this.getActivity());
+        return new MainFragmentPresenter(this.getActivity());
     }
 
     @Override

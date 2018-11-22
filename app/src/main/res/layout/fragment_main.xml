@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="160dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="471dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintTop_toBottomOf="@+id/banner">
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/normal_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlPrimaryColor="@color/colorPrimary">
+
+            <com.scwang.smartrefresh.header.TaurusHeader
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_pager_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"
+                android:visibility="invisible" />
+
+            <com.scwang.smartrefresh.header.TaurusHeader
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>
